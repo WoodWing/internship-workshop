@@ -11,24 +11,32 @@ class QuantityTest {
     @Test
     void shouldEquals() {
         // Test beer
-        assertEquals(new Quantity(VAASJE, 2), new Quantity(KLEINTJE, 4));
-        assertEquals(new Quantity(KRAT, 1), new Quantity(KLEINTJE, 60));
-        assertEquals(new Quantity(TANKWAGEN, 1), new Quantity(KRAT, 8400));
-        assertEquals(new Quantity(PITCHER, 10), new Quantity(KRAT, 2));
-        assertNotEquals(new Quantity(VAASJE, 1), new Quantity(TANKWAGEN, 1));
+        assertEquals(VASE.s(2), SMALL.s(4));
+        assertEquals(CRATE.s(1), SMALL.s(60));
+        assertEquals(TANKWAGON.s(1), CRATE.s(8400));
+        assertEquals(PITCHER.s(10), CRATE.s(2));
+        assertNotEquals(VASE.s(1), TANKWAGON.s(1));
 
         // Test distances
-        assertEquals(new Quantity(INCH, 12), new Quantity(FOOT, 1));
-        assertEquals(new Quantity(FURLONG, 2), new Quantity(FOOT, 1320));
-        assertEquals(new Quantity(INCH, 63360), new Quantity(MILE, 1));
-        assertNotEquals(new Quantity(INCH, 1), new Quantity(FOOT, 12));
+        assertEquals(INCH.es(12), FOOT.s(1));
+        assertEquals(FURLONG.s(2), FOOT.s(1320));
+        assertEquals(INCH.es(63360), MILE.s(1));
+        assertNotEquals(INCH.es(1), FOOT.s(12));
     }
 
     @Test
     void shouldThrow() {
-        Quantity distanceQuantity = new Quantity(INCH, 4);
-        Quantity beerQuantity = new Quantity(VAASJE, 7);
+        Quantity distanceQuantity = INCH.es(4);
+        Quantity beerQuantity = VASE.s(7);
 
         assertThrows(IllegalArgumentException.class, () -> distanceQuantity.equals(beerQuantity));
+        assertThrows(IllegalArgumentException.class, () -> distanceQuantity.plus(beerQuantity));
+    }
+
+    @Test
+    void shouldDoArithmetic() {
+        assertEquals(INCH.es(2), INCH.es(1).plus(INCH.es(1)));
+        assertEquals(INCH.es(-1), INCH.es(1).negate());
+        assertEquals(INCH.es(1), INCH.es(2).minus(INCH.es(1)));
     }
 }

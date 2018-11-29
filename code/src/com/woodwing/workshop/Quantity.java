@@ -5,7 +5,7 @@ public class Quantity {
     private double amount;
     private Unit unit;
 
-    public Quantity(Unit unit, double amount) {
+    Quantity(Unit unit, double amount) {
         this.amount = amount;
         this.unit = unit;
     }
@@ -21,6 +21,18 @@ public class Quantity {
     @Override
     public int hashCode() {
         return unit.hashCode(amount);
+    }
+
+    public Quantity plus(Quantity other) {
+        return new Quantity(this.unit, amount + convertedAmount(other));
+    }
+
+    public Quantity negate() {
+        return new Quantity(unit, -amount);
+    }
+
+    public Quantity minus(Quantity other) {
+        return this.plus(other.negate());
     }
 
     private double convertedAmount(Quantity other) {
