@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static com.woodwing.workshop.Unit.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class QuantityTest {
 
@@ -21,5 +22,13 @@ class QuantityTest {
         assertEquals(new Quantity(FURLONG, 2), new Quantity(FOOT, 1320));
         assertEquals(new Quantity(INCH, 63360), new Quantity(MILE, 1));
         assertNotEquals(new Quantity(INCH, 1), new Quantity(FOOT, 12));
+    }
+
+    @Test
+    void shouldThrow() {
+        Quantity distanceQuantity = new Quantity(INCH, 4);
+        Quantity beerQuantity = new Quantity(VAASJE, 7);
+
+        assertThrows(IllegalArgumentException.class, () -> distanceQuantity.equals(beerQuantity));
     }
 }

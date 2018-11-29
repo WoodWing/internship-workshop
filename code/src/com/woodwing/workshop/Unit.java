@@ -17,19 +17,26 @@ public class Unit {
     public static final Unit FURLONG = new Unit(10, CHAIN);
     public static final Unit MILE = new Unit(8, FURLONG);
 
+    private Unit baseUnit;
     private double baseUnitRatio;
 
     private Unit() {
+        this.baseUnit = this;
         this.baseUnitRatio = 1;
     }
 
     private Unit(double relativeRatio, Unit relativeUnit) {
+        this.baseUnit = relativeUnit.baseUnit;
         this.baseUnitRatio = relativeRatio * relativeUnit.baseUnitRatio;
     }
 
     double convertAmount(double amount, Unit other) {
+        if (!isCompatible(other)) throw new IllegalArgumentException("Incompatible Unit types!");
+
         return amount * other.baseUnitRatio / this.baseUnitRatio;
     }
 
     int hashCode(double amount) { return Double.hashCode(amount * baseUnitRatio); }
+
+    private boolean isCompatible(Unit other) { return this.baseUnit == other.baseUnit; }
 }

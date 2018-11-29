@@ -24,6 +24,6 @@ public class Quantity {
     }
 
     private double convertedAmount(Quantity other) {
-        return this.unit.convertAmount(this.amount, other.unit);
+        return this.unit.convertAmount(other.amount, other.unit);
     }
 }
