@@ -1,7 +1,7 @@
 import com.woodwing.workshop.Quantity;
 import org.junit.jupiter.api.Test;
 
-import static com.woodwing.workshop.Quantity.*;
+import static com.woodwing.workshop.Unit.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
